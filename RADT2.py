@@ -2,141 +2,86 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
-import os
+from shared import doLogin
+from shared3 import doPersonaInformation
 
-class PythonOrgSearch(unittest.TestCase):
+
+class CCAPPRADT2(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Firefox()
 
-    def test_search_in_python_org(self):
+    def doLogin(self):
+        doLogin(self.driver)
+    def doPersonaInformation(self):
+        doPersonaInformation(self.driver)
+
+
+    def test_ccapp_radt2(self):
         driver = self.driver
         driver.get("http://ccapp-test.marpasoft.com/")
-        self.assertIn("Welcom", driver.title)
-        #ниже две строки для разлогина
-        #RADTII = driver.find_element_by_xpath("//div[@id='main-nav']/div[@id='tools-nav']/ul[1]/li[5]/a")
-        #RADTII.click()
-        RADTII = driver.find_element_by_css_selector('a.btn.btn-primary.log-in')
-        RADTII.click()
-        username = driver.find_element_by_id('id_username')
-        username.send_keys("zipppt@gmail.com")
-        password = driver.find_element_by_id('id_password')
-        password.send_keys("zipppt2016")
-        log = driver.find_element_by_id('submit_button')
-        log.click()
-        RADTII = driver.find_element_by_xpath("//div[@class='row menu']/div[@class='col-sm-3'][2]/ul[3]/li[3]/a")
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//div[@class='wrapit']/h4[1]/a")
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-first_name']/input")
-        RADTII.clear()
-        RADTII.send_keys("Andrew")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-last_name']/input")
-        RADTII.clear()
-        RADTII.send_keys("Trofimchuk")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-middle_name']/input")
-        RADTII.clear()
-        RADTII.send_keys("Nikola")
-        element = self.driver.find_element_by_id('id_personal_info-date_of_birth_month')
-        select = Select(element)
-        select.select_by_visible_text("July")
-        element = self.driver.find_element_by_id('id_personal_info-date_of_birth_day')
-        select = Select(element)
-        select.select_by_visible_text("6")
-        element = self.driver.find_element_by_id('id_personal_info-date_of_birth_year')
-        select = Select(element)
-        select.select_by_visible_text("1978")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-ssn']/input")
-        RADTII.clear()
-        RADTII.send_keys("2222")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-street']/input")
-        RADTII.clear()
-        RADTII.send_keys("Golosiivska St.")
-        element = self.driver.find_element_by_id('id_personal_info-state')
-        select = Select(element)
-        select.select_by_visible_text("California")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-city']/input")
-        RADTII.clear()
-        RADTII.send_keys("Sacramento")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-zip']/input")
-        RADTII.clear()
-        RADTII.send_keys("11111")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-phone']/input")
-        RADTII.clear()
-        RADTII.send_keys("111-111-1111")
-        RADTII = driver.find_element_by_xpath("//div[@id='div_id_personal_info-email']/input")
-        RADTII.clear()
-        RADTII.send_keys("zipppt@gmail.com")
-        RADTII = driver.find_element_by_xpath("//div[@class='form_block']/a[1]/span")
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//input[@id='id_agree']")
-        #тут два клика захуярил
-        RADTII.click()
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//a[@id='submit_button']/span")
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//input[@id='id_agree']")
-        RADTII.click()
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//a[@id='submit_button']/span")
-        RADTII.click()
-        RADTII = driver.find_element_by_xpath("//div[@class='col-sm-10']/p[8]/a")
-        RADTII.click()
-        #Aler(driver).accept()
-        #Alert(driver).dismiss()
-        #name_prompt = Alert(driver)name_prompt.send_keys("HEZE")
-        #name_prompt.accept()
-        #prompts = driver.switch_prompts("//div[@id='div_id_course_name']/input")
+        self.assertIn("Welcome", driver.title)
 
-        #prompts = driver.find_element_by_xpath("//div[@id='div_id_course_name']/input")
-        #RADTII.clear()
-        #prompts.send_keys("HEZE")
-        #Create = driver.find_element_by_xpath("//div[@id='div_id_course_name']/input")
-        #Create.clear()
-        #Create.send_keys("HEZE")
-        #Create = driver.find_element_by_xpath("//input[@id='id_course_id']")
-        #Create.clear()
-        #Create.send_keys("2HEZE")
-        #Create = self.driver.find_element_by_id('id_academic_content_area')
-        #select = Select(Create)
-        #select.select_by_visible_text("physiology_and_pharmacology")
-        #Create = driver.find_element_by_xpath("//input[@id='id_hours']")
-        #Create.clear()
-        #Create.send_keys("32.5")
-        #Create = self.driver.find_element_by_id('id_grade')
-        #select = Select(Create)
-        #select.select_by_visible_text("A")
-        #Create = driver.find_element_by_xpath("//input[@id='id_completion_date']")
-        #Create.clear()
-        #Create.send_keys("2015.05.05")
-        #RADTII = driver.find_element_by_xpath("//a[@id='submit_button']/span")
-        #RADTII.click()
 
-        #RADTI = driver.find_element_by_xpath("//div[@id='div_id_registered']/input")
-        #RADTI.click()
-        #element = self.driver.find_element_by_id('id_initial_date_month')
-        #select = Select(element)
-        #select.select_by_visible_text("July")
-        #element = self.driver.find_element_by_id('id_initial_date_day')
-        #select = Select(element)
-        #select.select_by_visible_text("6")
-        #element = self.driver.find_element_by_id('id_initial_date_year')
-        #select = Select(element)
-        #select.select_by_visible_text("2015")
-        #RADTI = driver.find_element_by_xpath("//input[@id='id_current_organization_0']")
-        #RADTI.click()
-        #RADTI = driver.find_element_by_xpath("//input[@id='id_certified']")
-        #RADTI.click()
-        #RADTI = driver.find_element_by_xpath("//input[@id='id_have_ever_revoked_0']")
-        #RADTI.click()
-        #RADTI = driver.find_element_by_xpath("//a[@id='submit_button']/span")
-        #RADTI.click()
-        #RADTI = driver.find_element_by_xpath("//input[@id='id_type_0']")
-        #RADTI.click()
-        #RADTI = driver.find_element_by_xpath("//a[@id='submit_button']/span")
-        #RADTI.click()
-        #RADTI = driver.find_element_by_id("SWFUpload_0")
-        #RADTI.sendKeys("C:\\Users\\Андрей\\Downloads\\Новая папка\\IMAG0430.jpg")
+        self.doLogin()
+
+        element = driver.find_element_by_xpath("//div[@class='row menu']/div[@class='col-sm-3'][2]/ul[3]/li[3]/a")
+        element.click()
+
+        self.doPersonaInformation()
+
+        element = driver.find_element_by_xpath("//input[@id='id_agree']")
+        element.click()
+        element = driver.find_element_by_xpath("//a[@id='submit_button']/span")
+        element.click()
+        element = driver.find_element_by_xpath("//input[@id='id_agree']")
+        element.click()
+        element = driver.find_element_by_xpath("//a[@id='submit_button']/span")
+        element.click()
+
+        window_parent = driver.current_window_handle
+        window_popup = driver.window_handles[-1]
+        element = driver.find_element_by_xpath("//div[@class='col-sm-10']/p[8]/a")
+        element.click()
+        self.driver.implicitly_wait(5)
+        driver.switch_to.window(window_popup)
+
+        element = driver.find_element_by_xpath("//div[@id='div_id_course_name']/input")
+        element.send_keys("Course name")
+        element = driver.find_element_by_xpath("//div[@id='div_id_course_id']/input")
+        element.send_keys("Course id")
+        element = driver.find_element_by_xpath("//div[@id='div_id_school_name']/input")
+        element.send_keys("School name")
+        element = self.driver.find_element_by_id('id_academic_content_area')
+        select = Select(element)
+        select.select_by_visible_text("Physiology and Pharmacology")
+        element = driver.find_element_by_xpath("//div[@id='div_id_hours']/input")
+        element.clear()
+        element.send_keys('45')
+        element = self.driver.find_element_by_id('id_grade')
+        select = Select(element)
+        select.select_by_visible_text("A")
+        element = driver.find_element_by_xpath("//div[@id='div_id_completion_date']/input")
+        element.send_keys("11/20/14")
+        element = driver.find_element_by_xpath("//div[@class='form_block']/a[1]/span")
+        element.click()
+
+        driver.switch_to.window(window_parent)
+        element = driver.find_element_by_xpath("//a[@id='submit_button']/span")
+        element.click()
+
+        driver.get("http://ccapp-test.marpasoft.com/admin/profiles/profile/148208/")
+        #self.assertIn("Registered Alcohol & Drug Trainee II", driver.page_source)
+        element = driver.find_element_by_xpath("//input[@id='id_application_set-0-DELETE']")
+        element.click()
+        element = driver.find_element_by_xpath("//input[@class='default']")
+        element.click()
+
+
+
+
+
+
 
 
     def tearDown(self):
