@@ -1,37 +1,29 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from shared1 import doForm
-from shared import doLogin
+from shared import doLogin, doForm, doApply, doShining_Star_Award, doOpen
 
-class CCAPPVIP_Shining_Star_Award(unittest.TestCase):
-
+class CCAPPShining_Star_Award(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Firefox()
-
+    def doOpen(self):
+        doOpen(self.driver)
     def doLogin(self):
         doLogin(self.driver)
-
     def doForm(self):
         doForm(self.driver)
-
-    def test_ccapp_Shining_Star_Award (self):
+    def doApply(self):
+        doApply(self.driver)
+    def doShining_Star_Award(self):
+        doShining_Star_Award(self.driver)
+    def test_ccapp_Shining_Star_Award(self):
         driver = self.driver
-        driver.get("http://ccapp-test.marpasoft.com/")
+        self.doOpen()
         self.assertIn("Welcome", driver.title)
-
         self.doLogin()
-
-        element = driver.find_element_by_xpath("//div[@class='row menu']/div[@class='col-sm-3'][1]/ul[3]/li[7]/a")
-        element.click()
-
+        self.doShining_Star_Award()
         self.doForm()
-
-
-        element = driver.find_element_by_xpath("//div[@class='form_block']/a[@id='submit_button']/span")
-        element.click()
+        self.doApply()
         self.assertIn("Award nomination forms", driver.page_source)
 
     def tearDown(self):
@@ -42,5 +34,3 @@ class CCAPPVIP_Shining_Star_Award(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
