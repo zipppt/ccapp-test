@@ -1,10 +1,6 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from shared import doLogin, doOpen, doCCAPP2, doApply
-
-
+from shared import doLogin, doOpen, doCCAPP2, doApply, doPayment_form
 
 class CCAPPCCAPP2(unittest.TestCase):
 
@@ -19,6 +15,8 @@ class CCAPPCCAPP2(unittest.TestCase):
         doCCAPP2(self.driver)
     def doApply(self):
         doApply(self.driver)
+    def doPayment_form(self):
+        doPayment_form(self.driver)
 
     def test_ccapp_CCAPP2(self):
         driver = self.driver
@@ -27,15 +25,17 @@ class CCAPPCCAPP2(unittest.TestCase):
         self.doLogin()
         self.doCCAPP2()
         self.doApply()
+        self.doApply()
+        self.doPayment_form()
+        self.doApply()
 
-
-
-        #element = driver.find_element_by_xpath("//div[@class='form_block']/a[1]/span")
-        #element.click()
-        #element = driver.find_element_by_xpath("//div[@class='form_block']/a[@class='btn btn-primary']/span")
-        #element.click()
-
-
+        driver.get("http://ccapp-test.marpasoft.com/admin/conference/registration/?q=Trofimchuk")
+        element = driver.find_element_by_xpath("//tr[@class='row1']/th/a")
+        element.click()
+        element = driver.find_element_by_xpath("//div[@class='submit-row']/p[1]/a")
+        element.click()
+        element = driver.find_element_by_xpath("//div[@id='content']/form[1]/div[2]/input[2]")
+        element.click()
 
 
 
